@@ -1,0 +1,17 @@
+<Page xmlns="http://schemas.nativescript.org/tns.xsd" loaded="pageLoaded" class="page" 
+  xmlns:ui="nativescript-sms-receiver">
+  <ActionBar title="SMS Receiver Demo"/>
+  <ScrollView>
+    <StackLayout orientation="vertical" style="padding:10">
+      <Button id="btStartReceiver" tap="startReceiver" text="Start SMS Receiver" />
+      <Label text="Your App hash code is:" style="margin-top:10;font-weight:bold"/>
+      <TextView id="tvHashString" text="hashString"/>
+      <Label text="Sample SMS text:" style="margin-top:10;font-weight:bold"/>
+      <TextView id="tvSampleMessage" textWrap="true" text="sampleMessage"/>
+      <Label textWrap="true" text="Copy above message and send to current mobile number to test." />
+      <Label textWrap="true" text="NOTE: Before receive OTP, you must start SMS Receiver by clicking above button." />
+      <Label text="Received message:" style="margin-top:10;font-weight:bold"/>
+      <Label id="lblResponseMessage" text="responseMessage" textWrap="true"/>
+    </StackLayout>
+  </ScrollView>
+</Page>
