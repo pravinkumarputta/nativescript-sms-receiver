@@ -12,7 +12,9 @@ tns plugin add nativescript-sms-receiver
 ```
 
 ## Usage
-### Step 1. Add below code to {your-app-module}/App_Resources/Android/src/main/AndroidManifest.xml
+### Step 1. Register SMSBroadcastReceiver in manifest file
+
+Add below code to {your-app-module}/App_Resources/Android/src/main/AndroidManifest.xml
 ```
 <receiver android:name="com.pravinkumarputta.android.smsreceiver.SMSBroadcastReceiver" android:exported="true">
 	<intent-filter>
@@ -24,12 +26,13 @@ tns plugin add nativescript-sms-receiver
 ```
 import { SmsReceiver } from 'nativescript-sms-receiver';
 ```
-### Step 2. Instantiate SmsReceiver
+### Step 3. Instantiate SmsReceiver
+Call this method once before starting SMS listener
 ```
 SmsReceiver.getInstance();
 ```
 Note: Call above method only after page loaded.
-### Step 3. Start SMS listening
+### Step 4. Start SMS listening
 ```
 // register Sms Listener to get SMS callbacks
 SmsReceiver.getInstance().registerListeners(
@@ -79,6 +82,9 @@ After instantiating SMSReceiver access hash string using:
 ```
 SmsReceiver.getInstance().getHashString() // After instantiating SmsReceiver othersise it returns empty string
 ```
+
+## Used libraries
+ * [__smsreceiver__](https://github.com/pravinkumarputta/smsreceiver)
     
 ## License
 
