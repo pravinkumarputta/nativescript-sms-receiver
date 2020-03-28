@@ -11,6 +11,7 @@ let btStartReceiver: Button;
 let tvHashString: TextView;
 let tvSampleMessage: TextView;
 let lblResponseMessage: Label;
+let tvPhoneNumber: Label;
 // Event handler for Page 'loaded' event attached in main-page.xml
 export function pageLoaded(args: observable.EventData) {
     // Get the event sender
@@ -21,6 +22,7 @@ export function pageLoaded(args: observable.EventData) {
     tvHashString = <TextView>getViewById(page, "tvHashString");
     tvSampleMessage = <TextView>getViewById(page, "tvSampleMessage");
     lblResponseMessage = <Label>getViewById(page, "lblResponseMessage");
+    tvPhoneNumber = <Label>getViewById(page, "tvPhoneNumber");
 
     // first-time initialisation
     SmsReceiver.getInstance();
@@ -63,4 +65,13 @@ export function startReceiver() {
 
     // start sms receiver for single message
     SmsReceiver.getInstance().startReceiver();
+}
+
+export function getPhoneNumber() {
+    SmsReceiver.getInstance().requestForPhoneNumber((phoneNumber) => {
+        console.log('phoneNumber:', phoneNumber)
+        if (phoneNumber != null) {
+            tvPhoneNumber.text = phoneNumber
+        }
+    })
 }

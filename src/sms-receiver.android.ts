@@ -7,7 +7,6 @@ export class SmsReceiver {
     private onSMSReceived: Function = null;
     private onSMSReceiverTimeOut: Function = null;
     private smsReceiver: any = null;
-    private hashKey: string = "";
 
     constructor() {
         let scope = this;
@@ -40,12 +39,9 @@ export class SmsReceiver {
         let smsReceiverCallback = new SmsReceiverCallbackListener();
 
         this.smsReceiver = new com["pravinkumarputta"].android.smsreceiver.SMSReceiver(
-            application.android.foregroundActivity,
+            application.android.context,
             smsReceiverCallback
         );
-
-        // get app hash string
-        this.hashKey = com["pravinkumarputta"].android.smsreceiver.SMSReceiver.hashKey;
     }
 
     static getInstance(): SmsReceiver {
@@ -75,6 +71,24 @@ export class SmsReceiver {
     }
 
     getHashString(): string {
-        return this.hashKey;
+        return com["pravinkumarputta"].android.smsreceiver.SMSReceiver.getHashKey(application.android.context);
+    }
+
+    requestForPhoneNumber(callback: Function) {
+        // registering onActivityResult callback
+        let resultEvent = null
+        let activityResultEvent = function (args) {
+            // args.requestCode, args.resultCode, args.intent
+            let phoneNumber = com["pravinkumarputta"].android.smsreceiver.SMSReceiver.getPhoneNumberFromResult(args.requestCode, args.resultCode, args.intent)
+            application.android.off(application.AndroidApplication.activityResultEvent, resultEvent);
+            callback(phoneNumber)
+        }
+        resultEvent = application.android.on(
+            application.AndroidApplication.activityResultEvent,
+            activityResultEvent.bind(this)
+        );
+
+        // calling request
+        com["pravinkumarputta"].android.smsreceiver.SMSReceiver.requestForPhoneNumber(application.android.foregroundActivity)
     }
 }

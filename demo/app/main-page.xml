@@ -12,6 +12,9 @@
       <Label textWrap="true" text="NOTE: Before receive OTP, you must start SMS Receiver by clicking above button." />
       <Label text="Received message:" style="margin-top:10;font-weight:bold"/>
       <Label id="lblResponseMessage" text="responseMessage" textWrap="true"/>
+      <Button id="btPhoneNumber" tap="getPhoneNumber" text="Start SMS Receiver" />
+      <Label text="Selected phone number is:" style="margin-top:10;font-weight:bold"/>
+      <Label id="tvPhoneNumber" text="No phone number selected."/>
     </StackLayout>
   </ScrollView>
 </Page>

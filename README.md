@@ -82,6 +82,13 @@ After instantiating SMSReceiver access hash string using:
 ```
 SmsReceiver.getInstance().getHashString() // After instantiating SmsReceiver othersise it returns empty string
 ```
+## Request for phone number saved in your device
+```
+SmsReceiver.getInstance().requestForPhoneNumber((phoneNumber) => {
+    // phoneNumber is null if no number is selected.
+    ...
+})
+```
 
 ## Used libraries
  * [__smsreceiver__](https://github.com/pravinkumarputta/smsreceiver)
